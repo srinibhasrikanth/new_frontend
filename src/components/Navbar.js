@@ -14,7 +14,7 @@ export default function Navbar() {
   }, []);
   const navigate = useNavigate();
   const handleLogout = () => {
-    navigate("/login");
+    navigate("/");
     logout();
   };
 
@@ -111,7 +111,7 @@ export default function Navbar() {
             )
           ) : (
             <>
-              <Link to="/login">
+              <Link to="/">
                 <Typography variant="h6" component="div">
                   Login
                 </Typography>

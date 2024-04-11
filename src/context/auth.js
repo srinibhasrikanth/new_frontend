@@ -8,30 +8,29 @@ const AuthProvider = ({ children }) => {
     user: null,
     token: "",
     role: "",
+    _id: "", // Include _id in the state
   });
 
   useEffect(() => {
     const data = localStorage.getItem("auth");
     if (data) {
       const parseData = JSON.parse(data);
-      setAuth((prevAuth) => ({
-        ...prevAuth,
-        user: parseData.user,
-        token: parseData.token,
-        role: " ",
-      }));
+      setAuth(parseData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     axios.defaults.headers.common["Authorization"] = auth?.token;
-  }, [auth.token]);
+    localStorage.setItem("auth", JSON.stringify(auth)); // Save auth to localStorage
+  }, [auth.token, auth._id]); // Include auth._id in dependencies to save it to localStorage
 
   const logout = () => {
     setAuth({
       user: null,
       token: "",
+      role: "",
+      _id: "", // Clear _id on logout
     });
 
     localStorage.removeItem("auth");
