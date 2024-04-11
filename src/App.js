@@ -18,7 +18,7 @@ const App = () => {
           path="/admin-dashboard/:token/:id"
           element={<AdminDashboard />}
         />
-         <Route
+        <Route
           path="/volunteer-dashboard/:token/:id"
           element={<VolunteerDashboard />}
         />

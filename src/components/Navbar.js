@@ -12,6 +12,15 @@ export default function Navbar() {
   React.useEffect(() => {
     console.log("hello");
   }, []);
+
+  // Retrieve token and _id from localStorage
+  const token = localStorage.getItem("auth")
+    ? JSON.parse(localStorage.getItem("auth")).token
+    : "";
+  const _id = localStorage.getItem("auth")
+    ? JSON.parse(localStorage.getItem("auth"))._id
+    : "";
+
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/");
@@ -38,12 +47,18 @@ export default function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             ACM VNRVJIET
           </Typography>
+
           {auth.token ? (
             auth.role === "user" ? (
               <div className="flex flex-row space-x-6">
+                <Link to={`/volunteer-dashboard/${token}/${_id}`}>
+                  <Typography variant="h6" component="div">
+                    Dashboard
+                  </Typography>
+                </Link>
                 <Link to="/membership">
                   <Typography variant="h6" component="div">
-                    Membership
+                    Events
                   </Typography>
                 </Link>
                 <Link to="/profile">
